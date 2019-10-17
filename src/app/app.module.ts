@@ -6,6 +6,21 @@ import { AppStoreModule } from './store/app-store.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'baskets' },
+  {
+    path: 'baskets',
+    loadChildren: () =>
+      import('./baskets/baskets.module').then(m => m.BasketsModule)
+  },
+  {
+    path: 'villains',
+    loadChildren: () =>
+      import('./receipts/receipts.module').then(m => m.ReceiptsModule)
+  }
+];
 
 @NgModule({
   declarations: [
@@ -16,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     CoreModule,
     HttpClientModule,
+    RouterModule.forRoot(routes),
     AppStoreModule
   ],
   providers: [],
