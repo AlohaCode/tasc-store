@@ -16,7 +16,7 @@ const routes: Routes = [
       import('./baskets/baskets.module').then(m => m.BasketsModule)
   },
   {
-    path: 'villains',
+    path: 'receipts',
     loadChildren: () =>
       import('./receipts/receipts.module').then(m => m.ReceiptsModule)
   }
