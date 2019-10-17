@@ -11,8 +11,12 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     MaterialModule,
     RouterModule // because we use <router-outlet> and routerLink
   ],
-  declarations: [ToolbarComponent],
-  exports: [ToolbarComponent]
+  declarations: [
+    ToolbarComponent
+  ],
+  exports: [
+    ToolbarComponent
+  ]
 })
 export class CoreModule {
   constructor(

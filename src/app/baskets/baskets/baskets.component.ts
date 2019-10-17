@@ -9,11 +9,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./baskets.component.css']
 })
 export class BasketsComponent implements OnInit {
+  title: string;
   selected: Basket;
   baskets$: Observable<Basket[]>;
   loading$: Observable<boolean>;
 
   constructor( private basketSvc: BasketService ) {
+    this.title = 'TASC Baskets';
     this.baskets$ = basketSvc.entities$;
     this.loading$ = basketSvc.loading$;
   }

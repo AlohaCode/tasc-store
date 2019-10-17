@@ -1,0 +1,23 @@
+.tasc-basketsList-container {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  width: 97%;
+  height: 100%;
+  margin: 10px;
+  padding: 0px 10px 0px 10px;
+  background-color: cornflowerblue;
+}
+
+.task-title {
+  margin: 16px;
+}
+
+.tasc-card {
+  flex: 1;
+  margin: 4px;
+}
+
+.tasc-spinner {
+  flex: 1 1 auto;
+}
