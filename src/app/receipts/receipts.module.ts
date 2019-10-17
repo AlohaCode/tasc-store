@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
+import { RecieptsComponent } from './reciepts/reciepts.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [RecieptsComponent],
   imports: [
     CommonModule
   ]
