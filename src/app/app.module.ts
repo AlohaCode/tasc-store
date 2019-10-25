@@ -14,11 +14,6 @@ const routes: Routes = [
     path: 'baskets',
     loadChildren: () =>
       import('./baskets/baskets.module').then(m => m.BasketsModule)
-  },
-  {
-    path: 'receipts',
-    loadChildren: () =>
-      import('./receipts/receipts.module').then(m => m.ReceiptsModule)
   }
 ];
 
@@ -29,12 +24,11 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    CoreModule,
     HttpClientModule,
+    CoreModule,
     RouterModule.forRoot(routes),
     AppStoreModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
