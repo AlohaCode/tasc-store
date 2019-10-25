@@ -1,1 +1,35 @@
-<p>receipts works!</p>
+<div *ngIf='receipt'>
+  <div class='task-title'>
+    <h3>{{title}}</h3>
+  </div>
+  <div class='tasc-receiptsList-container'>
+    <mat-card class="tasc-card">
+      <mat-card-header>
+        <mat-card-title>{{ receipt.description | titlecase }}</mat-card-title>
+        <mat-card-subtitle>{{ receipt.items.length }} Items</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let item of receipt.items">
+            <p matLine><b>{{item.description}}</b></p>
+            <p matLine><b>Item ID: </b>{{item.id}} </p>
+            <p matLine><b>Taxable: </b> {{item.taxable}} </p>
+            <p matLine><b>Imported: </b> {{item.imported}} </p>
+            <p matLine><b>Shelf Price: </b> {{item.shelfPrice | currency}} </p>
+            <p matLine><b>Sales Taxes: </b> {{item.taxes | currency}} </p>
+            <p matLine><b>Total: </b> {{item.total | currency}} </p>
+          </mat-list-item>
+        </mat-list>
+        <div>
+          <h4>Total Sales Tax: {{taxes | currency}}</h4>
+          <h4>Purchase Total: {{total | currency}}</h4>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="accent" [routerLink]="['../../baskets']">
+          Baskets
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
