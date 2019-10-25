@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Basket } from '../../core/models/basket';
-import { BasketService } from '../basket.service';
+import { IBasket } from '../../core/models/i-basket';
+import { BasketsService } from '../baskets.service';
 import { Observable } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-baskets',
@@ -10,44 +11,29 @@ import { Observable } from 'rxjs';
 })
 export class BasketsComponent implements OnInit {
   title: string;
-  selected: Basket;
-  baskets$: Observable<Basket[]>;
+  selected: IBasket;
+  baskets$: Observable<IBasket[]>;
   loading$: Observable<boolean>;
 
-  constructor( private basketSvc: BasketService ) {
-    this.title = 'TASC Baskets';
-    this.baskets$ = basketSvc.entities$;
-    this.loading$ = basketSvc.loading$;
-  }
+  constructor(
+    private basketSvc: BasketsService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getBaskets();
+    this.loadData();
   }
 
-  add(basket: Basket) {
-    this.basketSvc.add(basket);
+  loadData() {
+    console.log('basket component - data load');
+    this.title = 'TASC Baskets';
+    this.baskets$ = this.basketSvc.entities$;
+    this.loading$ = this.basketSvc.loading$;
   }
 
-  delete(basket: Basket) {
-    this.basketSvc.delete(basket);
-    this.close();
-  }
-
-  getBaskets() {
-    this.basketSvc.getAll();
-    this.close();
-  }
-
-  update(basket: Basket) {
-    this.basketSvc.update(basket);
-  }
-
-  close() {
-    this.selected = null;
-  }
-
-  select(basket: Basket) {
-    this.selected = basket;
+  showReceipt(basketId: number) {
+    console.log('navigating to receipt screen', basketId);
+    this.router.navigate([basketId], { relativeTo: this.route });
   }
 
 }

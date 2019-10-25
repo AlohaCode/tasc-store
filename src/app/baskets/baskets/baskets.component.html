@@ -4,14 +4,30 @@
 <div class='tasc-basketsList-container'>
   <mat-spinner *ngIf="loading$ | async; else basketsList" mode="indeterminate" color="accent" class='tasc-spinner'>
   </mat-spinner>
-  <ng-template #basketsList class='tasc-baskets-container' *ngFor='let basket of baskets$ | async'>
-    <mat-card class="tasc-card">
-      <mat-card-header>
-        <h4>{{ basket.description }}</h4>
-      </mat-card-header>
-      <mat-card-content>
-        <span> {{ basket.items.length }} Items</span>
-      </mat-card-content>
-    </mat-card>
+  <ng-template #basketsList>
+    <div *ngFor='let basket of baskets$ | async'>
+      <mat-card class="tasc-card">
+        <mat-card-header>
+            <mat-card-title>{{ basket.description | titlecase }}</mat-card-title>
+            <mat-card-subtitle>{{ basket.items.length }} Items</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item *ngFor="let item of basket.items">
+              <p matLine><b>Description: </b>{{item.description}} </p>
+              <p matLine><b>Item ID: </b>{{item.id}} </p>
+              <p matLine><b>Taxable: </b> {{item.taxable}} </p>
+              <p matLine><b>Imported: </b> {{item.imported}} </p>
+              <p matLine><b>Shelf Price: </b> {{item.shelfPrice | currency}} </p>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)='showReceipt(basket.id)'>
+              Receipt
+          </button>
+      </mat-card-actions>
+      </mat-card>
+    </div>
   </ng-template>
 </div>
