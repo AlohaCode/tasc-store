@@ -1,3 +1,3 @@
-export * from './basket';
-export * from './item';
-export * from './receipt';
+export * from './i-basket';
+export * from './i-item';
+export * from './i-receipt';
