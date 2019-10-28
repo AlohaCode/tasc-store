@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ReceiptsService } from '../receipts.service';
 import { IBasket, IItem, IReceipt } from 'src/app/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { BasketsService } from 'src/app/baskets/baskets.service';
 import { map, tap, first } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
@@ -12,11 +12,12 @@ import { computeTaxes } from '../../core/utils';
   templateUrl: './receipts.component.html',
   styleUrls: ['./receipts.component.css']
 })
-export class ReceiptsComponent implements OnInit {
+export class ReceiptsComponent implements OnInit, OnDestroy {
 
   basketId: number;
   baskets$: Observable<IBasket[]>;
-  storeSub: Observable<any>;
+  receipt$: Observable<any>;
+  receiptSubscription: Subscription;
   title: string;
   receipt: IReceipt;
   taxes = 0;
@@ -34,16 +35,20 @@ export class ReceiptsComponent implements OnInit {
     this.lookInStore(this.basketId);
   }
 
+  ngOnDestroy() {
+    this.receiptSubscription.unsubscribe();
+  }
+
   add(receipt: IReceipt) {
     this.receiptsSvc.add(receipt);
   }
 
   lookInStore(basketId: number) {
-    this.storeSub = this.receiptsSvc.entities$.pipe(
+    this.receipt$ = this.receiptsSvc.entities$.pipe(
       map(receipts => receipts.find(rcpt => rcpt.id === basketId)),
       first()
     );
-    this.storeSub.subscribe(receipt => {
+    this.receiptSubscription = this.receipt$.subscribe(receipt => {
       if (receipt) {
         this.receipt = receipt;
       } else {
@@ -57,10 +62,8 @@ export class ReceiptsComponent implements OnInit {
     const baskets$ = basketEnts$.pipe(
       tap(basketArry => {
         if (basketArry.length > 0) {
-          console.log('in tap, basketArry param: ', basketArry);
           const basket: IBasket = basketArry.find(bskt => bskt.id === basketId);
           if (basket) {
-            console.log('basket object:', basket);
             const newReceipt = {
               id: basket.id,
               description: basket.description,
