@@ -15,7 +15,6 @@ export class BasketsResolver implements Resolve<boolean> {
       .pipe(
         tap(loaded => {
           if (!loaded) {
-            console.log('getting baskets from db');
             this.basketsSvc.getAll();
           }
         }),

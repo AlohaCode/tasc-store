@@ -13,6 +13,5 @@ export function computeTaxes(item: IItem): void {
 
 export function roundUptoNickel(tax: number): number {
   const ret = Number((Math.ceil(tax / 0.05) * 0.05).toFixed(2));
-  console.log('Figureing tax, tax/taxable:', tax, ret);
   return ret;
 }
