@@ -1,12 +1,14 @@
-import { TestBed } from '@angular/core/testing';
-
+import { async, TestBed, inject } from '@angular/core/testing';
 import { BasketsService } from './baskets.service';
 
-describe('BasketsService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+xdescribe('BasketsService', () => {
 
-  it('should be created', () => {
-    const service: BasketsService = TestBed.get(BasketsService);
-    expect(service).toBeTruthy();
-  });
+  beforeEach(async(() => TestBed.configureTestingModule({
+    providers: [ BasketsService ]
+  })));
+
+  it('should be created', inject([BasketsService], (basketsSvc: BasketsService) => {
+    expect(basketsSvc).toBeTruthy();
+  }));
+
 });
