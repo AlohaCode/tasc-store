@@ -21,18 +21,12 @@ export class BasketsComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadData();
-  }
-
-  loadData() {
-    console.log('basket component - data load');
     this.title = 'TASC Baskets';
     this.baskets$ = this.basketSvc.entities$;
     this.loading$ = this.basketSvc.loading$;
   }
 
   showReceipt(basketId: number) {
-    console.log('navigating to receipt screen', basketId);
     this.router.navigate([basketId], { relativeTo: this.route });
   }
 

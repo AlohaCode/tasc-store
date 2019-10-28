@@ -2,7 +2,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.9.
 
-## Development server
+# Setup
+
+Run `npm install` to get all dependencies.
+
+## Development server(s)
 
 1. Run `npm run server` to start a back-end server on `http://localhost:9000`
 2. Run `npm start` for a front-end dev server. The `npm start` command MUST be used to configure the proxy correctly for back-end integration.
@@ -18,5 +22,7 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Run `ng e2e` to execute the end-to-end tests via [Cypress](https://www.cypress.io/).
+
+Run `npm start` for a front-end dev server before executing tests.  The back-end server SHOULD NOT be running.
 
